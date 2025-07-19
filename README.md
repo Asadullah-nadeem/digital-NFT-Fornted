@@ -44,7 +44,7 @@ frontend/
 
 ```bash
 git clone https://github.com/Asadullah-nadeem/digital-NFT-Fornted.git
-cd frontend
+cd digital-NFT-Fornted
 ```
 
 #### 2️⃣ Install the dependencies
