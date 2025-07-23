@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import mm from "../assets/mm.png";
-import sw from "../assets/sw.png";
 import { FaEthereum } from "react-icons/fa";
 
 const Hero = () => {
-  const [walletAddress, setWalletAddress] = useState(null);
+  const [setWalletAddress] = useState(null);
   const [message, setMessage] = useState("");
 
   const connectWallet = async () => {
@@ -70,7 +68,11 @@ const Hero = () => {
             onClick={connectWallet}
             className="border-2 border-[#F6851B] text-white py-4 px-6 rounded-full uppercase font-semibold flex items-center hover:scale-105 transition"
           >
-            <img src={mm} alt="MetaMask" className="w-6 h-6 mr-2" />
+            <img
+              src="http://localhost:8081/assets/sw.png"
+              alt="MetaMask"
+              className="w-6 h-6 mr-2"
+            />
             METAMASK
           </button>
 
@@ -80,7 +82,11 @@ const Hero = () => {
             rel="noopener noreferrer"
             className="border-2 border-[#0086FF] text-white py-4 px-6 rounded-full uppercase font-semibold flex items-center hover:scale-105 transition"
           >
-            <img src={sw} alt="OpenSea" className="w-6 h-6 mr-2" />
+            <img
+              src="http://localhost:8081/assets/mm.png"
+              alt="OpenSea"
+              className="w-6 h-6 mr-2"
+            />
             OPENSEA
           </a>
         </div>
