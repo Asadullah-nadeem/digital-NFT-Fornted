@@ -11,7 +11,7 @@ const Footer = () => {
     >
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-4">
         <div>
-          &copy; {cy} OopsFire Wolf. All rights reserved. Developed by Asadullah Nadeem
+          &copy; {cy} OopsFire Wolf - Developed by Asadullah Nadeem
         </div>
       </div>
     </footer>
