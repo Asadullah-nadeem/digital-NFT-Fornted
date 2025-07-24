@@ -11,27 +11,25 @@ const Hero = () => {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-
         const wallet = accounts[0];
         setWalletAddress(wallet);
         setMessage(`✅ Wallet connected: ${wallet}`);
 
-        // 🔥 Add Demo Coin (Test Token) to MetaMask
         await window.ethereum.request({
           method: "wallet_watchAsset",
           params: {
-            type: "ERC20", // Could be 'ERC721' too for NFTs
+            type: "ERC20",
 
             options: {
-              address: "0x000000000000000000000000000000000000dEaD", //address
-              symbol: "DEMO",
+              address: "0x000000000000000000000000000000000000dEaD",
+              symbol: "OopsFire Wolf",
               decimals: 18,
               image: "http://localhost:8081/assets/nfts.png",
             },
           },
         });
 
-        setMessage("✅ Demo Coin added to MetaMask.");
+        setMessage("OopsFire Wolf Coin added to MetaMask.");
 
         setTimeout(() => {
           window.open(
@@ -69,7 +67,7 @@ const Hero = () => {
             className="border-2 border-[#F6851B] text-white py-4 px-6 rounded-full uppercase font-semibold flex items-center hover:scale-105 transition"
           >
             <img
-              src="http://localhost:8081/assets/sw.png"
+              src="http://10.53.7.74:8081/assets/mm.png"
               alt="MetaMask"
               className="w-6 h-6 mr-2"
             />
@@ -83,7 +81,7 @@ const Hero = () => {
             className="border-2 border-[#0086FF] text-white py-4 px-6 rounded-full uppercase font-semibold flex items-center hover:scale-105 transition"
           >
             <img
-              src="http://localhost:8081/assets/mm.png"
+              src="http://10.53.7.74:8081/assets/sw.png"
               alt="OpenSea"
               className="w-6 h-6 mr-2"
             />
@@ -99,7 +97,7 @@ const Hero = () => {
       {/* Right */}
       <div className="w-full lg:w-1/2 relative">
         <img
-          src="http://localhost:8081/assets/nfts.png"
+          src="http://10.53.7.74:8081/assets/nfts.png"
           alt="NFT Collection"
           className="rounded-xl shadow-lg w-full"
         />
