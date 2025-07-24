@@ -1,27 +1,27 @@
 ## 🎨 OopsFire Wolf — Frontend (React)
 
-This is the **frontend (UI)** for the **OopsFire Wolf NFT Website**, built using **React.js** and **Tailwind CSS**.  
+This is the **frontend (UI)** for the **OopsFire Wolf NFT Website**, built using **React.js** and **Tailwind CSS**.
 Users can view NFTs, connect their MetaMask wallet, and open NFTs directly on OpenSea.
 
 ### 🚀 What This App Does
 
-✅ Connect wallet using MetaMask  
-✅ Display NFT from backend image URL  
-✅ Open NFT on OpenSea  
-✅ Show messages like wallet connected or coin added ✅  
-✅ Fully mobile responsive using Tailwind CSS  
-✅ Fast ⚡ built with React and optionally Vite  
+✅ Connect wallet using MetaMask
+✅ Display NFT from backend image URL
+✅ Open NFT on OpenSea
+✅ Show messages like wallet connected or coin added ✅
+✅ Fully mobile responsive using Tailwind CSS
+✅ Fast ⚡ built with React and optionally Vite
 
 ### 🛠 Tech Stack Used
 
-| Purpose            | Technology         |
-|-------------------|--------------------|
-| UI framework       | React.js           |
-| Styling            | Tailwind CSS       |
-| Wallet connection  | MetaMask (Web3)    |
-| Icons              | react-icons        |
-| Data/API           | Backend (Spring Boot) or mock data |
-| Package tool       | npm or yarn        |
+| Purpose           | Technology                         |
+| ----------------- | ---------------------------------- |
+| UI framework      | React.js                           |
+| Styling           | Tailwind CSS                       |
+| Wallet connection | MetaMask (Web3)                    |
+| Icons             | react-icons                        |
+| Data/API          | Backend (Spring Boot) or mock data |
+| Package tool      | npm or yarn                        |
 
 ### 📁 Folder Structure
 
@@ -67,6 +67,7 @@ Frontend will run at: `http://localhost:5173` or `http://localhost:3000` dependi
 ### 🖼 Load NFT Image from Backend
 
 React loads this image from backend:
+
 ```js
 http://localhost:8080/assets/nfts.png
 ```
@@ -110,8 +111,6 @@ window.ethereum.request({
 
 You can add screenshots for homepage, MetaMask popup, or NFT view.
 
-
-
 ### ✅ To-Do & Improvements (optional section)
 
 - Add real smart contract details
@@ -119,7 +118,6 @@ You can add screenshots for homepage, MetaMask popup, or NFT view.
 - Add OpenSea live link
 - Connect with Spring Boot backend for logs
 
-  
 ### ✨ Author
 
 Created with ❤️ by [Asadullah Nadeem](https://github.com/asadullah-nadeem)

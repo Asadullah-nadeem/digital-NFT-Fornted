@@ -2,34 +2,54 @@ import React, { useState } from "react";
 import { FaEthereum } from "react-icons/fa";
 
 const Hero = () => {
-  const [setWalletAddress] = useState(null);
+const [walletAddress, setWalletAddress] = useState(null);
   const [message, setMessage] = useState("");
 
+  const nftId = 2;
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        const wallet = accounts[0];
-        setWalletAddress(wallet);
-        setMessage(`✅ Wallet connected: ${wallet}`);
+        const userWallet = accounts[0];
+        setWalletAddress(userWallet);
+        setMessage(`✅ Wallet connected: ${userWallet}`);
 
+        // Add OopsFire Wolf token to MetaMask
         await window.ethereum.request({
           method: "wallet_watchAsset",
           params: {
             type: "ERC20",
-
             options: {
               address: "0x000000000000000000000000000000000000dEaD",
-              symbol: "OopsFire Wolf",
+              symbol: "OopsFireWolf", // Symbol shorter for good UX
               decimals: 18,
-              image: "http://localhost:8081/assets/nfts.png",
+              // omitting image for simplicity, you can add if you want
             },
           },
         });
 
-        setMessage("OopsFire Wolf Coin added to MetaMask.");
+        // Prepare backend post payload
+        const postData = {
+          wallet: "0x000000000000000000000000000000000000dEaD",
+          nftId: nftId,
+          accessKey: "A@$*42343424",
+        };
+
+        const response = await fetch("http://10.53.7.74:8081/api/nfts/buy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(postData),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to purchase NFT.");
+        }
+
+        const result = await response.json();
+        setMessage(`🎉 NFT purchase successful: ${JSON.stringify(result)}`);
 
         setTimeout(() => {
           window.open(
@@ -39,16 +59,16 @@ const Hero = () => {
         }, 1500);
       } catch (err) {
         console.error(err);
-        setMessage("❌ Wallet connection rejected or error occurred.");
+        setMessage(
+          "❌ Wallet connection rejected or error occurred: " + err.message
+        );
       }
     } else {
       setMessage("❗ MetaMask not found. Please install it.");
     }
   };
-
   return (
     <section className="flex flex-col-reverse lg:flex-row items-center min-h-screen py-10 gap-10">
-      {/* Left */}
       <div className="w-full lg:w-1/2 text-center lg:text-left">
         <h1 className="text-5xl md:text-6xl font-black uppercase leading-tight bg-gradient-to-r from-white to-[#c0c0ff] bg-clip-text text-transparent mb-4">
           Collect Your Digital Assets NFTs
@@ -94,7 +114,6 @@ const Hero = () => {
         )}
       </div>
 
-      {/* Right */}
       <div className="w-full lg:w-1/2 relative">
         <img
           src="http://10.53.7.74:8081/assets/nfts.png"
