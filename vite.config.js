@@ -8,7 +8,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      "/api": "http://localhost:8081",
+      "/api": "http://10.53.7.74:8081",
     },
+  },
+  define: {
+    'process.env': process.env
   },
 });

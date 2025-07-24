@@ -3,67 +3,71 @@ import { FaEthereum } from "react-icons/fa";
 
 const Hero = () => {
 const [walletAddress, setWalletAddress] = useState(null);
-  const [message, setMessage] = useState("");
+ const [message, setMessage] = useState("");
+ const nftId = 2;
 
-  const nftId = 2;
-  const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        const userWallet = accounts[0];
-        setWalletAddress(userWallet);
-        setMessage(`✅ Wallet connected: ${userWallet}`);
+ const connectWallet = async () => {
+   if (window.ethereum) {
+     try {
+       const accounts = await window.ethereum.request({
+         method: "eth_requestAccounts",
+       });
+       const userWallet = accounts[0];
+       setWalletAddress(userWallet);
+       setMessage(`✅ Wallet connected: ${userWallet}`);
 
-        await window.ethereum.request({
-          method: "wallet_watchAsset",
-          params: {
-            type: "ERC20",
-            options: {
-              address: "0x000000000000000000000000000000000000dEaD",
-              symbol: "OfWolf",
-              decimals: 18,
-            },
-          },
-        });
+       await window.ethereum.request({
+         method: "wallet_watchAsset",
+         params: {
+           type: "ERC20",
+           options: {
+             address: process.env.REACT_APP_TOKEN_ADDRESS,
+             symbol: process.env.REACT_APP_TOKEN_SYMBOL,
+             decimals: Number(process.env.REACT_APP_TOKEN_DECIMALS),
+             image: process.env.REACT_APP_TOKEN_IMAGE,
+           },
+         },
+       });
 
-        // Prepare backend post payload
-        const postData = {
-          wallet: "0x000000000000000000000000000000000000dEaD",
-          nftId: nftId,
-          accessKey: "A@$*42343424",
-        };
+       // Prepare the data for backend post
+       const postData = {
+         wallet: process.env.REACT_APP_TOKEN_ADDRESS,
+         nftId: nftId,
+         accessKey: process.env.REACT_APP_ACCESS_KEY,
+       };
 
-        const response = await fetch("http://10.53.7.74:8081/api/nfts/buy", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(postData),
-        });
+       const response = await fetch(
+         `${process.env.REACT_APP_API_BASE_URL}/api/nfts/buy`,
+         {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify(postData),
+         }
+       );
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || "Failed to purchase NFT.");
-        }
+       if (!response.ok) {
+         const errorData = await response.json();
+         throw new Error(errorData.message || "Failed to purchase NFT.");
+       }
 
-        const result = await response.json();
-        setMessage(`🎉 NFT purchase successful: ${JSON.stringify(result)}`);
+       const result = await response.json();
+       setMessage(`🎉 NFT purchase successful: ${JSON.stringify(result)}`);
 
-        setTimeout(() => {
-          window.open(
-            "https://opensea.io/assets/ethereum/0x1234567890abcdef/101",
-            "_blank"
-          );
-        }, 1500);
-      } catch (err) {
-        console.error(err);
-        setMessage(
-          "❌ Wallet connection rejected or error occurred: " + err.message
-        );
-      }
-    } else {
-      setMessage("❗ MetaMask not found. Please install it.");
-    }
+       setTimeout(() => {
+         window.open(
+           "https://opensea.io/assets/ethereum/0x1234567890abcdef/101",
+           "_blank"
+         );
+       }, 1500);
+     } catch (err) {
+       console.error(err);
+       setMessage(
+         "❌ Wallet connection rejected or error occurred: " + err.message
+       );
+     }
+   } else {
+     setMessage("❗ MetaMask not found. Please install it.");
+   }
   };
   return (
     <section className="flex flex-col-reverse lg:flex-row items-center min-h-screen py-10 gap-10">
