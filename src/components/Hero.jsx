@@ -16,16 +16,14 @@ const [walletAddress, setWalletAddress] = useState(null);
         setWalletAddress(userWallet);
         setMessage(`✅ Wallet connected: ${userWallet}`);
 
-        // Add OopsFire Wolf token to MetaMask
         await window.ethereum.request({
           method: "wallet_watchAsset",
           params: {
             type: "ERC20",
             options: {
               address: "0x000000000000000000000000000000000000dEaD",
-              symbol: "OopsFireWolf", // Symbol shorter for good UX
+              symbol: "OfWolf",
               decimals: 18,
-              // omitting image for simplicity, you can add if you want
             },
           },
         });
